@@ -5,26 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-<<<<<<< HEAD
-      ticks: 638642464723743563
-    m_Hash: 3710651677
-=======
-      ticks: 638645054630000000
+      ticks: 638651243851580695
     m_Hash: 2383718536
->>>>>>> Movement
   m_LockFileStatus:
     m_FilePath: G:/UnityProjects/GamePrototype/Colosseum/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-<<<<<<< HEAD
-      ticks: 638642464723743563
-    m_Hash: 3596635249
-=======
-      ticks: 638645054630000000
+      ticks: 638651243851590651
     m_Hash: 413549254
->>>>>>> Movement
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -37,7 +27,7 @@ m_ResolvedPackages:
   isDirectDependency: 1
   version: 1.0.0
   source: 2
-  resolvedPath: /Users/coleparis/Colosseum/Library/PackageCache/com.unity.2d.sprite@1.0.0
+  resolvedPath: G:\UnityProjects\GamePrototype\Colosseum\Library\PackageCache\com.unity.2d.sprite@1.0.0
   assetPath: Packages/com.unity.2d.sprite
   name: com.unity.2d.sprite
   displayName: 2D Sprite
