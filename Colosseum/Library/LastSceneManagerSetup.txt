@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Andrei.unity
+=======
+- path: Assets/TestMovementScene.unity
+>>>>>>> Movement
   isLoaded: 1
   isActive: 1
   isSubScene: 0

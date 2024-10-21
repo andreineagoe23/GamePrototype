@@ -8,7 +8,11 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+<<<<<<< HEAD
 	"picker_window_position_offset.0B486DF2" = "134;23;320;550"
+=======
+	"picker_window_position_offset.0B486DF2" = "20.5;267;320;550"
+>>>>>>> Movement
 	"picker_search_text.0B486DF2" = ""
 	"last_search.0B486DF2" = ""
 	"OpenInspectorPreview.0B486DF2" = "0"
