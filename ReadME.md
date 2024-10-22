@@ -1,13 +1,16 @@
-Intended Player Experience
-The game aims to immerse players in the thrill of surviving relentless waves of enemies. Quick reflexes, strategic combat, and skillful movement are essential to overcome increasingly difficult challenges and emerge as the ultimate survivor.
+Welcome to Colosseum Clash !
+
+The game aims to immerse players in the thrill of surviving relentless waves of enemies, where quick reflexes, strategic combat, and skillful movement are essential to overcome increasingly difficult challenges and emerge as the ultimate survivor.
 
 Game Environment Features
 Grand Colosseum-style arena with towering walls and a central battlefield.
 Surrounded by spectator seating with distinct areas for player spawn points and enemy entry points.
 Basic architectural elements (pillars, arches, obstacles) for tactical gameplay.
+
 Player Control Features
 Movement: WASD keys for navigation.
 Camera: Mouse controls for aiming and viewing direction.
+
 Combat Actions:
 Left-click for primary attacks (melee strikes or ranged shots).
 Spacebar to jump.
