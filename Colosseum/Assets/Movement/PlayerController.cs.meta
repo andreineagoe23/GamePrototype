@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Colosseum/Assets/Enemy Assets/EnemyAI.cs.meta
-guid: f3647813624b45d49a9e64b63c2e3ace
-========
 guid: 132cfbf6ef6c7407e92278955f1f1a79
->>>>>>>> Arena:Colosseum/Assets/Movement/FPSController.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
