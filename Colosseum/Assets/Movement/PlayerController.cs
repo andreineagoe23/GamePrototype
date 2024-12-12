@@ -23,9 +23,14 @@ public class PlayerController : MonoBehaviour
 
     [Header("Camera")]
     public Camera cam;
-    public float sensitivity;
 
     float xRotation = 0f;
+
+    // Experience system variables
+    public int currentXP = 0; // Current experience points
+    public int level = 1; // Player's current level
+    public int xpToNextLevel = 100; // XP required to level up
+    public int xpPerOrb = 10; // XP gained per orb collected
 
     void Awake()
     {
@@ -36,7 +41,6 @@ public class PlayerController : MonoBehaviour
         playerInput = new PlayerInput();
         input = playerInput.Main;
         AssignInputs();
-
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -70,22 +74,21 @@ public class PlayerController : MonoBehaviour
             _PlayerVelocity.y = -2f;
         }
         _PlayerVelocity.y += gravity * Time.deltaTime;
-        
-            
+
         controller.Move(_PlayerVelocity * Time.deltaTime);
     }
 
     void LookInput(Vector3 input)
     {
-        float mouseX = input.x;
-        float mouseY = input.y;
+        float mouseX = input.x * SettingsMenu.sensitivity;
+        float mouseY = input.y * SettingsMenu.sensitivity;
 
-        xRotation -= (mouseY * Time.deltaTime * sensitivity);
+        xRotation -= mouseY * Time.deltaTime;
         xRotation = Mathf.Clamp(xRotation, -80, 80);
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime * sensitivity));
+        transform.Rotate(Vector3.up * mouseX * Time.deltaTime);
     }
 
     void OnEnable()
@@ -96,7 +99,6 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        // Adds force to the player rigidbody to jump
         if (isGrounded)
             _PlayerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
     }
@@ -120,17 +122,14 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeAnimationState(string newState)
     {
-        // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
         if (currentAnimationState == newState) return;
 
-        // PLAY THE ANIMATION //
         currentAnimationState = newState;
         animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
     }
 
     void SetAnimations()
     {
-        // If player is not attacking
         if (!attacking)
         {
             if (_PlayerVelocity.x == 0 && _PlayerVelocity.z == 0)
@@ -208,5 +207,26 @@ public class PlayerController : MonoBehaviour
 
         GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(GO, 20);
+    }
+
+    // Experience related methods
+    public void AddExperience(int amount)
+    {
+        currentXP += amount;
+        Debug.Log("Current XP: " + currentXP);
+
+        // Check if the player has leveled up
+        if (currentXP >= xpToNextLevel)
+        {
+            LevelUp();
+        }
+    }
+
+    void LevelUp()
+    {
+        level++;
+        currentXP = 0; // Reset XP for the next level
+        xpToNextLevel += 50; // Increase XP requirement for the next level (can be adjusted)
+        Debug.Log("Level Up! Current Level: " + level);
     }
 }
