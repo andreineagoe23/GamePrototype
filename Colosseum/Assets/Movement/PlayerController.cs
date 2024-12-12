@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class PlayerController : MonoBehaviour
 
     CharacterController controller;
     Animator animator;
-    AudioSource audioSource;
+
+    public AudioClip dashSound;           // Dash sound effect
+    private AudioSource audioSource;      // AudioSource for playing sounds
+
 
     [Header("Controller")]
     public float moveSpeed = 5;
@@ -21,22 +25,25 @@ public class PlayerController : MonoBehaviour
 
     bool isGrounded = true;
 
+    [Header("Dash")]
+    public float dashDistance = 10f;       // Distance covered during dash
+    public float dashSpeed = 50f;         // Speed of the dash
+    public float dashCooldown = 5f;       // Cooldown time for dash
+    public Image dashCooldownImage;       // UI image for cooldown indicator
+    private bool canDash = true;          // Tracks whether dash is available
+
     [Header("Camera")]
     public Camera cam;
+    public float sensitivity;
 
     float xRotation = 0f;
-
-    // Experience system variables
-    public int currentXP = 0; // Current experience points
-    public int level = 1; // Player's current level
-    public int xpToNextLevel = 100; // XP required to level up
-    public int xpPerOrb = 10; // XP gained per orb collected
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
+
 
         playerInput = new PlayerInput();
         input = playerInput.Main;
@@ -49,12 +56,17 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         isGrounded = controller.isGrounded;
+        weaponSwitching = FindObjectOfType<WeaponSwitching>();
 
         // Repeat Inputs
         if (input.Attack.IsPressed())
         { Attack(); }
 
+        if (input.Dash.triggered && canDash)
+        { StartDash(); }
+
         SetAnimations();
+        UpdateDashCooldown();
     }
 
     void FixedUpdate()
@@ -70,7 +82,8 @@ public class PlayerController : MonoBehaviour
         moveDirection.z = input.y;
 
         controller.Move(transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
-        if (isGrounded && _PlayerVelocity.y < 0){
+        if (isGrounded && _PlayerVelocity.y < 0)
+        {
             _PlayerVelocity.y = -2f;
         }
         _PlayerVelocity.y += gravity * Time.deltaTime;
@@ -80,15 +93,15 @@ public class PlayerController : MonoBehaviour
 
     void LookInput(Vector3 input)
     {
-        float mouseX = input.x * SettingsMenu.sensitivity;
-        float mouseY = input.y * SettingsMenu.sensitivity;
+        float mouseX = input.x;
+        float mouseY = input.y;
 
-        xRotation -= mouseY * Time.deltaTime;
+        xRotation -= (mouseY * Time.deltaTime * sensitivity);
         xRotation = Mathf.Clamp(xRotation, -80, 80);
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-        transform.Rotate(Vector3.up * mouseX * Time.deltaTime);
+        transform.Rotate(Vector3.up * (mouseX * Time.deltaTime * sensitivity));
     }
 
     void OnEnable()
@@ -107,16 +120,92 @@ public class PlayerController : MonoBehaviour
     {
         input.Jump.performed += ctx => Jump();
         input.Attack.started += ctx => Attack();
+        input.Dash.performed += ctx => StartDash(); // Assign the dash input
+    }
+
+    // ---------- //
+    // DASH MECHANIC //
+    // ---------- //
+
+    void StartDash()
+    {
+        if (!canDash) return;
+
+        PlayDashSound();
+
+        // Get the movement direction based on input
+        Vector2 moveInput = input.Movement.ReadValue<Vector2>();
+        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
+
+        // If there's no movement input, dash in the forward direction
+        if (moveDirection == Vector3.zero)
+        {
+            moveDirection = transform.forward;
+        }
+        else
+        {
+            // Adjust to world space direction
+            moveDirection = transform.TransformDirection(moveDirection).normalized;
+        }
+
+        // Perform the dash
+        StartCoroutine(Dash(moveDirection));
+        canDash = false;
+    }
+    void PlayDashSound()
+    {
+        if (dashSound != null && audioSource != null)
+        {
+            audioSource.PlayOneShot(dashSound);
+        }
+    }
+
+    IEnumerator Dash(Vector3 direction)
+    {
+        float dashDuration = dashDistance / dashSpeed;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < dashDuration)
+        {
+            // Move the player in the dash direction
+            controller.Move(direction * dashSpeed * Time.deltaTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Trigger cooldown
+        StartCoroutine(DashCooldown());
+    }
+
+
+    IEnumerator DashCooldown()
+    {
+        float cooldownTimer = 0f;
+
+        while (cooldownTimer < dashCooldown)
+        {
+            cooldownTimer += Time.deltaTime;
+            UpdateDashCooldown(cooldownTimer / dashCooldown);
+            yield return null;
+        }
+
+        // Dash is ready again
+        canDash = true;
+        UpdateDashCooldown(1f); // Fully refill the cooldown bar
+    }
+
+    void UpdateDashCooldown(float fillAmount = 1f)
+    {
+        if (dashCooldownImage != null)
+        {
+            dashCooldownImage.fillAmount = fillAmount;
+        }
     }
 
     // ---------- //
     // ANIMATIONS //
     // ---------- //
 
-    public const string IDLE = "Idle";
-    public const string WALK = "Walk";
-    public const string ATTACK1 = "Attack 1";
-    public const string ATTACK2 = "Attack 2";
 
     string currentAnimationState;
 
@@ -132,10 +221,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!attacking)
         {
-            if (_PlayerVelocity.x == 0 && _PlayerVelocity.z == 0)
-            { ChangeAnimationState(IDLE); }
-            else
-            { ChangeAnimationState(WALK); }
+           ChangeAnimationState(weaponSwitching.IDLE);
+           
         }
     }
 
@@ -157,7 +244,7 @@ public class PlayerController : MonoBehaviour
     bool attacking = false;
     bool readyToAttack = true;
     int attackCount;
-
+    public WeaponSwitching weaponSwitching;
     public void Attack()
     {
         if (!readyToAttack || attacking) return;
@@ -165,7 +252,7 @@ public class PlayerController : MonoBehaviour
         readyToAttack = false;
         attacking = true;
 
-        Invoke(nameof(ResetAttack), attackSpeed);
+        Invoke(nameof(ResetAttack), weaponSwitching.weaponSpeed);
         Invoke(nameof(AttackRaycast), attackDelay);
 
         audioSource.pitch = Random.Range(0.9f, 1.1f);
@@ -173,12 +260,12 @@ public class PlayerController : MonoBehaviour
 
         if (attackCount == 0)
         {
-            ChangeAnimationState(ATTACK1);
+            ChangeAnimationState(weaponSwitching.ATTACK1);
             attackCount++;
         }
         else
         {
-            ChangeAnimationState(ATTACK2);
+            ChangeAnimationState(weaponSwitching.ATTACK2);
             attackCount = 0;
         }
     }
@@ -196,8 +283,11 @@ public class PlayerController : MonoBehaviour
             HitTarget(hit.point);
 
             if (hit.transform.TryGetComponent<Actor>(out Actor T))
-            { T.TakeDamage(attackDamage); }
+            {
+                T.TakeDamage(weaponSwitching.weaponDamage);
+            }
         }
+
     }
 
     void HitTarget(Vector3 pos)
@@ -207,26 +297,5 @@ public class PlayerController : MonoBehaviour
 
         GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(GO, 20);
-    }
-
-    // Experience related methods
-    public void AddExperience(int amount)
-    {
-        currentXP += amount;
-        Debug.Log("Current XP: " + currentXP);
-
-        // Check if the player has leveled up
-        if (currentXP >= xpToNextLevel)
-        {
-            LevelUp();
-        }
-    }
-
-    void LevelUp()
-    {
-        level++;
-        currentXP = 0; // Reset XP for the next level
-        xpToNextLevel += 50; // Increase XP requirement for the next level (can be adjusted)
-        Debug.Log("Level Up! Current Level: " + level);
     }
 }
