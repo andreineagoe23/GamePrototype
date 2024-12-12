@@ -51,6 +51,19 @@ public class PlayerController : MonoBehaviour
         { Attack(); }
 
         SetAnimations();
+
+        // // Handle the slash effect
+        // if (attacking == true)
+        // {
+        //     hitEffect.SetActive(true);
+        // }
+        // else
+        // {
+        //     hitEffect.SetActive(false);
+        // }
+
+        // Reset the attacking flag
+        // attacking = false;
     }
 
     void FixedUpdate()
@@ -196,7 +209,7 @@ public class PlayerController : MonoBehaviour
         {
             HitTarget(hit.point);
 
-            if (hit.transform.TryGetComponent<Actor>(out Actor T))
+            if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
             { T.TakeDamage(attackDamage); }
         }
     }
