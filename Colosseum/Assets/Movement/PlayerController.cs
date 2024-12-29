@@ -66,7 +66,23 @@ public class PlayerController : MonoBehaviour
         { StartDash(); }
 
         SetAnimations();
+<<<<<<< HEAD
         UpdateDashCooldown();
+=======
+
+        // // Handle the slash effect
+        // if (attacking == true)
+        // {
+        //     hitEffect.SetActive(true);
+        // }
+        // else
+        // {
+        //     hitEffect.SetActive(false);
+        // }
+
+        // Reset the attacking flag
+        // attacking = false;
+>>>>>>> origin/EnemySpawns
     }
 
     void FixedUpdate()
@@ -282,10 +298,15 @@ public class PlayerController : MonoBehaviour
         {
             HitTarget(hit.point);
 
+<<<<<<< HEAD
             if (hit.transform.TryGetComponent<Actor>(out Actor T))
             {
                 T.TakeDamage(weaponSwitching.weaponDamage);
             }
+=======
+            if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
+            { T.TakeDamage(attackDamage); }
+>>>>>>> origin/EnemySpawns
         }
 
     }
