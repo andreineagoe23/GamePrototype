@@ -75418,7 +75418,7 @@ Transform:
   m_GameObject: {fileID: 1372822792}
   serializedVersion: 2
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 802.2, y: 685.7, z: 380.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -108017,11 +108017,11 @@ PrefabInstance:
     - target: {fileID: 4660810356463813152, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: deathScreen
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1239024794}
     - target: {fileID: 4660810356463813152, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: damageFlashImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1631952747}
     - target: {fileID: 9118040398070867158, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
