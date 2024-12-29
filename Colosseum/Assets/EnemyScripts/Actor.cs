@@ -31,27 +31,3 @@ public class Actor : MonoBehaviour
         Destroy(gameObject);
     }
 }
-
-public class EnemyAI : MonoBehaviour
-{
-    public Transform player; // Reference to the player
-    public float moveSpeed = 3f;
-    private Rigidbody rb;
-
-    void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
-
-    void FixedUpdate()
-    {
-        if (player != null)
-        {
-            // Calculate direction
-            Vector3 direction = (player.position - transform.position).normalized;
-
-            // Move the enemy using Rigidbody (apply force or velocity)
-            rb.MovePosition(transform.position + direction * moveSpeed * Time.fixedDeltaTime);
-        }
-    }
-}
