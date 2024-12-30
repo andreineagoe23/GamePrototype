@@ -15,7 +15,6 @@ public class PlayerController : MonoBehaviour
     public AudioClip dashSound;           // Dash sound effect
     private AudioSource audioSource;      // AudioSource for playing sounds
 
-
     [Header("Controller")]
     public float moveSpeed = 5;
     public float gravity = -9.8f;
@@ -44,7 +43,6 @@ public class PlayerController : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
 
-
         playerInput = new PlayerInput();
         input = playerInput.Main;
         AssignInputs();
@@ -60,36 +58,28 @@ public class PlayerController : MonoBehaviour
 
         // Repeat Inputs
         if (input.Attack.IsPressed())
-        { Attack(); }
+        {
+            Attack();
+        }
 
         if (input.Dash.triggered && canDash)
-        { StartDash(); }
+        {
+            StartDash();
+        }
 
         SetAnimations();
-<<<<<<< HEAD
         UpdateDashCooldown();
-=======
-
-        // // Handle the slash effect
-        // if (attacking == true)
-        // {
-        //     hitEffect.SetActive(true);
-        // }
-        // else
-        // {
-        //     hitEffect.SetActive(false);
-        // }
-
-        // Reset the attacking flag
-        // attacking = false;
->>>>>>> origin/EnemySpawns
     }
 
     void FixedUpdate()
-    { MoveInput(input.Movement.ReadValue<Vector2>()); }
+    {
+        MoveInput(input.Movement.ReadValue<Vector2>());
+    }
 
     void LateUpdate()
-    { LookInput(input.Look.ReadValue<Vector2>()); }
+    {
+        LookInput(input.Look.ReadValue<Vector2>());
+    }
 
     void MoveInput(Vector2 input)
     {
@@ -121,10 +111,14 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnEnable()
-    { input.Enable(); }
+    {
+        input.Enable();
+    }
 
     void OnDisable()
-    { input.Disable(); }
+    {
+        input.Disable();
+    }
 
     void Jump()
     {
@@ -149,25 +143,22 @@ public class PlayerController : MonoBehaviour
 
         PlayDashSound();
 
-        // Get the movement direction based on input
         Vector2 moveInput = input.Movement.ReadValue<Vector2>();
         Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y);
 
-        // If there's no movement input, dash in the forward direction
         if (moveDirection == Vector3.zero)
         {
             moveDirection = transform.forward;
         }
         else
         {
-            // Adjust to world space direction
             moveDirection = transform.TransformDirection(moveDirection).normalized;
         }
 
-        // Perform the dash
         StartCoroutine(Dash(moveDirection));
         canDash = false;
     }
+
     void PlayDashSound()
     {
         if (dashSound != null && audioSource != null)
@@ -183,16 +174,13 @@ public class PlayerController : MonoBehaviour
 
         while (elapsedTime < dashDuration)
         {
-            // Move the player in the dash direction
             controller.Move(direction * dashSpeed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        // Trigger cooldown
         StartCoroutine(DashCooldown());
     }
-
 
     IEnumerator DashCooldown()
     {
@@ -205,9 +193,8 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
-        // Dash is ready again
         canDash = true;
-        UpdateDashCooldown(1f); // Fully refill the cooldown bar
+        UpdateDashCooldown(1f);
     }
 
     void UpdateDashCooldown(float fillAmount = 1f)
@@ -221,7 +208,6 @@ public class PlayerController : MonoBehaviour
     // ---------- //
     // ANIMATIONS //
     // ---------- //
-
 
     string currentAnimationState;
 
@@ -237,8 +223,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!attacking)
         {
-           ChangeAnimationState(weaponSwitching.IDLE);
-           
+            ChangeAnimationState(weaponSwitching.IDLE);
         }
     }
 
@@ -261,6 +246,7 @@ public class PlayerController : MonoBehaviour
     bool readyToAttack = true;
     int attackCount;
     public WeaponSwitching weaponSwitching;
+
     public void Attack()
     {
         if (!readyToAttack || attacking) return;
@@ -298,17 +284,16 @@ public class PlayerController : MonoBehaviour
         {
             HitTarget(hit.point);
 
-<<<<<<< HEAD
             if (hit.transform.TryGetComponent<Actor>(out Actor T))
             {
                 T.TakeDamage(weaponSwitching.weaponDamage);
             }
-=======
-            if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
-            { T.TakeDamage(attackDamage); }
->>>>>>> origin/EnemySpawns
-        }
 
+            if (hit.transform.TryGetComponent<Enemy>(out Enemy enemy))
+            {
+                enemy.TakeDamage(attackDamage);
+            }
+        }
     }
 
     void HitTarget(Vector3 pos)

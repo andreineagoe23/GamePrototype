@@ -345,12 +345,6 @@ PrefabInstance:
       addedObject: {fileID: 3533354461774365811}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6b070634da492a48a576974248d64b9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8926875919845024010}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6b070634da492a48a576974248d64b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9137198638431272093}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6b070634da492a48a576974248d64b9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4384959701613196942}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: e6b070634da492a48a576974248d64b9, type: 3}
       insertIndex: -1
@@ -383,37 +377,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8926875919845024010
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8914286996971816111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43ea50d9364fe4a0da23b882f0d868c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  MoveSpeed: 4
-  MaxDist: 10
-  MinDist: 5
-  attackDamage: 10
-  attackCooldown: 2
---- !u!114 &9137198638431272093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8914286996971816111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093ab43aacc37472baf8212bd8cffb40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
 --- !u!114 &4384959701613196942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -426,7 +389,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1985d7ddd22fa47eb91579bc6f3c5ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  moveSpeed: 4
+  minDistanceToPlayer: 5
+  maxDistanceToPlayer: 10
+  attackDamage: 10
+  attackCooldown: 2
+  player: {fileID: 0}
+  waveSpawner: {fileID: 0}
+  maxHealth: 0
 --- !u!136 &8928737780411501266
 CapsuleCollider:
   m_ObjectHideFlags: 0
