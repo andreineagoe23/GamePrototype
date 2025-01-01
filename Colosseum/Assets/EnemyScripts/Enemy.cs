@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Animator mAnimator;
+
     [Header("Movement")]
     public float moveSpeed = 4f;
     public float minDistanceToPlayer = 5f;
@@ -26,6 +28,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        mAnimator = GetComponent<Animator>();
+
         // Initialize references
         player = GameObject.FindGameObjectWithTag("Player").transform;
         waveSpawner = FindObjectOfType<WaveSpawner>();
@@ -56,6 +60,8 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
+        mAnimator.SetTrigger("TrMove");
+
         // Move forward
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
@@ -72,6 +78,8 @@ public class Enemy : MonoBehaviour
 
     private void AttackPlayer()
     {
+        mAnimator.SetTrigger("TrAttack");
+
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
         {
@@ -82,6 +90,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        mAnimator.SetTrigger("TrDamage");
+
         currentHealth -= damage;
         Debug.Log($"Enemy took {damage} damage. Remaining health: {currentHealth}");
 
@@ -93,6 +103,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        mAnimator.SetTrigger("TrDie");
+
         Debug.Log("Enemy died!");
 
         // Notify the wave spawner that an enemy has been killed

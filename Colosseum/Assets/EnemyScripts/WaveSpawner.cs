@@ -4,7 +4,7 @@ public class WaveSpawner : MonoBehaviour
 {
     [Header("Wave Settings")]
     [SerializeField] private float countdown;
-    [SerializeField] private GameObject spawnPoint;
+    [SerializeField] private Transform spawnPoint;
 
     public Wave[] waves;
     public int currentWaveIndex = 0;
@@ -55,9 +55,7 @@ public class WaveSpawner : MonoBehaviour
         {
             for (int i = 0; i < waves[currentWaveIndex].enemies.Length; i++)
             {
-                Enemy enemy = Instantiate(currentWave.enemies[i], spawnPoint.transform);
-
-                enemy.transform.SetParent(spawnPoint.transform);
+                Enemy enemy = Instantiate(currentWave.enemies[i], spawnPoint.position, spawnPoint.rotation);
 
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
             }
