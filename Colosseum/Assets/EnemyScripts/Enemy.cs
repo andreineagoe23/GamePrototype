@@ -36,20 +36,26 @@ public class Enemy : MonoBehaviour
 
         // Initialize attack cooldown
         lastAttackTime = -attackCooldown; // Allows immediate attack if in range
+
+        mAnimator.SetTrigger("TrIdle");
     }
 
     private void Update()
     {
-        if (player == null) return;
-        
         // Rotate to face the player
         transform.LookAt(player);
 
-        // Move towards the player if out of attack range
+        // Calculate the distance to the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer > minDistanceToPlayer)
         {
+            // Only trigger "TrMove" if the current animation is not already "Move"
+            if (!mAnimator.GetCurrentAnimatorStateInfo(0).IsName("Move"))
+            {
+                mAnimator.SetTrigger("TrMove");
+            }
+
             MoveTowardsPlayer();
         }
         else if (distanceToPlayer <= minDistanceToPlayer)
@@ -60,7 +66,6 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        mAnimator.SetTrigger("TrMove");
 
         // Move forward
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
@@ -71,6 +76,7 @@ public class Enemy : MonoBehaviour
         // Check if enough time has passed since the last attack
         if (Time.time > lastAttackTime + attackCooldown)
         {
+            mAnimator.SetTrigger("TrAttack");
             AttackPlayer();
             lastAttackTime = Time.time; // Reset cooldown timer
         }
@@ -78,7 +84,7 @@ public class Enemy : MonoBehaviour
 
     private void AttackPlayer()
     {
-        mAnimator.SetTrigger("TrAttack");
+        
 
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
         if (playerHealth != null)
@@ -97,13 +103,13 @@ public class Enemy : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            mAnimator.SetTrigger("TrDie");
             Die();
         }
     }
 
     private void Die()
     {
-        mAnimator.SetTrigger("TrDie");
 
         Debug.Log("Enemy died!");
 

@@ -7459,7 +7459,7 @@ Transform:
   m_GameObject: {fileID: 174756344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 756.1, y: 600.3, z: 558.5}
+  m_LocalPosition: {x: 756.1, y: 599.3, z: 558.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7988,7 +7988,7 @@ PrefabInstance:
     - target: {fileID: 4419532932788952289, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: hitEffect
       value: 
-      objectReference: {fileID: 1951300476}
+      objectReference: {fileID: 174756344}
     - target: {fileID: 4660810356463813152, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -22627,6 +22627,7 @@ MonoBehaviour:
   - enemies:
     - {fileID: 2086448706}
     - {fileID: 901778679}
+    - {fileID: 876711093}
     timeToNextEnemy: 10
     timeToNextWave: 30
     enemiesLeft: 0
@@ -37233,6 +37234,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 239195407}
     - target: {fileID: -2290665649053468079, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
+      propertyPath: moveSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2290665649053468079, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
       propertyPath: waveSpawner
       value: 
       objectReference: {fileID: 631708178}
@@ -37243,6 +37248,10 @@ PrefabInstance:
     - target: {fileID: -2290665649053468079, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
       propertyPath: attackCooldown
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: -2290665649053468079, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
+      propertyPath: minDistanceToPlayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1949430161825482, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
       propertyPath: m_Name
@@ -65225,7 +65234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4384959701613196942, guid: 877dc861ccb8af54a82af8e7768fd13c, type: 3}
       propertyPath: attackCooldown
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4384959701613196942, guid: 877dc861ccb8af54a82af8e7768fd13c, type: 3}
       propertyPath: minDistanceToPlayer
@@ -68856,7 +68865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 477254, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 477254, guid: f8243bb353e5cb74481bb26fe62fd298, type: 3}
       propertyPath: m_LocalPosition.z
@@ -71972,8 +71981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1985d7ddd22fa47eb91579bc6f3c5ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  minDistanceToPlayer: 5
+  moveSpeed: 7
+  minDistanceToPlayer: 4
   maxDistanceToPlayer: 10
   attackDamage: 10
   attackCooldown: 2
