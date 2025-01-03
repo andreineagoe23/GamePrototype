@@ -4,8 +4,13 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     [Header("Wave Settings")]
+<<<<<<< HEAD
     public Wave[] waves;  // Array to hold different waves of enemies
     public Transform[] spawnPoints;  // Multiple spawn points for enemies
+=======
+    [SerializeField] private float countdown;
+    [SerializeField] private Transform spawnPoint;
+>>>>>>> origin/EnemySpawns
 
     public float timeBetweenWaves = 5f;  // Time between waves
     private int currentWaveIndex = 0;
@@ -49,8 +54,14 @@ public class WaveSpawner : MonoBehaviour
             // Spawn the specified number of enemies for the current enemy type
             for (int i = 0; i < enemyData.enemyCount; i++)
             {
+<<<<<<< HEAD
                 SpawnEnemy(enemyData.enemyPrefab);
                 yield return new WaitForSeconds(wave.spawnInterval);
+=======
+                Enemy enemy = Instantiate(currentWave.enemies[i], spawnPoint.position, spawnPoint.rotation);
+
+                yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemy);
+>>>>>>> origin/EnemySpawns
             }
         }
 
