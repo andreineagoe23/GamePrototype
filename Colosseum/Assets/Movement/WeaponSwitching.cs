@@ -7,7 +7,10 @@ public class WeaponSwitching : MonoBehaviour
     public string ATTACK1 = "Attack 1";
     public string ATTACK2 = "Attack 2";
     public float weaponSpeed = 1f;
-    public int weaponDamage = 2;
+    public float weaponDamage = 2f;
+    public float projectileDamage = 1;
+    public Transform cam;
+    public Quaternion projectileRotation = Quaternion.Euler(0, 0, 0);
 
     public GameObject arms; // Reference to the Arms GameObject
 
@@ -45,8 +48,11 @@ public class WeaponSwitching : MonoBehaviour
             ATTACK2 = "Spear Attack";
             IDLE = "Spear Idle";
             ToggleArmsMeshRenderer(false);
-            weaponSpeed = 3f;
-            weaponDamage = 2;
+            weaponSpeed = 1.5f;
+            weaponDamage = 1.5f;
+            projectileDamage = 5;
+            projectileRotation = Quaternion.Euler(0, 180, 0);
+
             Debug.Log($"Weapon switched to Spear. Animations: IDLE={IDLE}, ATTACK1={ATTACK1}, ATTACK2={ATTACK2}");
 
 
@@ -59,7 +65,10 @@ public class WeaponSwitching : MonoBehaviour
             ATTACK2 = "Attack 2";
             IDLE = "Sword Idle";
             weaponSpeed = 0.3f;
-            weaponDamage = 1;
+            weaponDamage = 0.5f;
+            projectileDamage = 1;
+            projectileRotation =  Quaternion.Euler(90, 0, 0);
+
             ToggleArmsMeshRenderer(true);
             Debug.Log($"Weapon switched to Dagger. Animations: IDLE={IDLE}, ATTACK1={ATTACK1}, ATTACK2={ATTACK2}");
 

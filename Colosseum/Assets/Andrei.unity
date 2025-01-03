@@ -8145,6 +8145,7 @@ GameObject:
   - component: {fileID: 895309631}
   - component: {fileID: 895309630}
   - component: {fileID: 895309629}
+  - component: {fileID: 895309633}
   m_Layer: 5
   m_Name: Overlays
   m_TagString: Untagged
@@ -8237,6 +8238,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &895309633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895309628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e802d2b7ac18143f7a96ffb370e96ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashOverlay: {fileID: 978157543}
+  fadeDuration: 0.5
+  dashEffectDuration: 1
 --- !u!1 &898515760
 GameObject:
   m_ObjectHideFlags: 0
@@ -9098,6 +9114,7 @@ GameObject:
   - component: {fileID: 978157542}
   - component: {fileID: 978157544}
   - component: {fileID: 978157543}
+  - component: {fileID: 978157545}
   m_Layer: 5
   m_Name: DashCooldown
   m_TagString: Untagged
@@ -9136,8 +9153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  m_Material: {fileID: 2100000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+  m_Color: {r: 0.25490198, g: 0.25490198, b: 0.25490198, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9162,6 +9179,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978157541}
   m_CullTransparentMesh: 1
+--- !u!114 &978157545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978157541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e802d2b7ac18143f7a96ffb370e96ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashOverlay: {fileID: 978157543}
+  fadeDuration: 0.5
+  dashEffectDuration: 1
 --- !u!1 &1027419598
 GameObject:
   m_ObjectHideFlags: 0
@@ -18216,7 +18248,7 @@ PrefabInstance:
     - target: {fileID: 4419532932788952289, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: dashCooldownImage
       value: 
-      objectReference: {fileID: 978157543}
+      objectReference: {fileID: 0}
     - target: {fileID: 4583428670620864123, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.000000059604645
