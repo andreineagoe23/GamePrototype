@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Actor : MonoBehaviour
 {
-    int currentHealth;
-    public int maxHealth;
+    float currentHealth;
+    public float maxHealth;
 
     void Awake()
     {
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         currentHealth -= amount;
         Debug.Log("Enemy took " + amount + " damage. Current health: " + currentHealth);
