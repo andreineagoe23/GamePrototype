@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -8048,7 +8048,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 705576032216427073, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 9118040398070867158, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1951300477}
     m_AddedComponents:
@@ -12208,10 +12208,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000
-  damageFlashImage: {fileID: 991323464}
+  damageFlashImage: {fileID: 0}
   flashSpeed: 5
   flashColor: {r: 1, g: 0, b: 0, a: 0.5}
-  deathScreen: {fileID: 1808502728}
+  deathScreen: {fileID: 0}
 --- !u!1 &305402584
 GameObject:
   m_ObjectHideFlags: 0
@@ -15787,11 +15787,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 400996610}
   m_Mesh: {fileID: 4300002, guid: 3070f2f19bdca364c9aa00b7dde98c69, type: 3}
---- !u!224 &402354485 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 705576032216427073, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
-  m_PrefabInstance: {fileID: 191752125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &405785093
 GameObject:
   m_ObjectHideFlags: 0
@@ -22621,22 +22616,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dc730fc305824d10a835837de883124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countdown: 10
-  spawnPoint: {fileID: 174756345}
   waves:
-  - enemies:
-    - {fileID: 2086448706}
-    - {fileID: 901778679}
-    - {fileID: 876711093}
-    timeToNextEnemy: 10
-    timeToNextWave: 30
-    enemiesLeft: 0
-  - enemies:
-    - {fileID: 876711093}
-    timeToNextEnemy: 2
-    timeToNextWave: 3
-    enemiesLeft: 0
-  currentWaveIndex: 0
+  - enemyData:
+    - enemyPrefab: {fileID: 0}
+      enemyCount: 2
+    spawnInterval: 0
+  - enemyData:
+    - enemyPrefab: {fileID: 0}
+      enemyCount: 0
+    - enemyPrefab: {fileID: 0}
+      enemyCount: 0
+    spawnInterval: 0
+  spawnPoints:
+  - {fileID: 174756345}
+  timeBetweenWaves: 5
 --- !u!1 &633689864
 GameObject:
   m_ObjectHideFlags: 0
@@ -30073,17 +30066,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 876470731}
   m_Mesh: {fileID: 4300002, guid: 3070f2f19bdca364c9aa00b7dde98c69, type: 3}
---- !u!114 &876711093 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4384959701613196942, guid: 877dc861ccb8af54a82af8e7768fd13c, type: 3}
-  m_PrefabInstance: {fileID: 1884228708}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1985d7ddd22fa47eb91579bc6f3c5ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &889050625
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30626,17 +30608,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1949430161825482, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
   m_PrefabInstance: {fileID: 1083405410}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &901778679 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -2290665649053468079, guid: 9e066cea98814aa448c70270a3c60251, type: 3}
-  m_PrefabInstance: {fileID: 1083405410}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901778678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1985d7ddd22fa47eb91579bc6f3c5ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &901778682
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -33379,17 +33350,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 987664692}
   m_Mesh: {fileID: 4300002, guid: 3070f2f19bdca364c9aa00b7dde98c69, type: 3}
---- !u!114 &991323464 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 388116784596159128, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
-  m_PrefabInstance: {fileID: 191752125}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &992365820
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62049,11 +62009,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4048350889173628, guid: 57cdf9b55e9c7594595fd8fd27acee42, type: 3}
   m_PrefabInstance: {fileID: 1808480800}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1808502728 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1247201730373210288, guid: 0b5f3ae4c0ce34a2a9c838f12e926571, type: 3}
-  m_PrefabInstance: {fileID: 191752125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1809554189
 GameObject:
   m_ObjectHideFlags: 0
@@ -68538,7 +68493,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 402354485}
+  m_Father: {fileID: 239195407}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -71983,11 +71938,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 7
   minDistanceToPlayer: 4
-  maxDistanceToPlayer: 10
   attackDamage: 10
   attackCooldown: 2
   player: {fileID: 239195407}
-  waveSpawner: {fileID: 631708178}
   maxHealth: 3
 --- !u!1 &2091534129
 GameObject:
