@@ -410,7 +410,7 @@ MonoBehaviour:
   attackDamage: 30
   attackCooldown: 8
   player: {fileID: 0}
-  maxHealth: 10
+  maxHealth: 50
 --- !u!136 &6795892188191856743
 CapsuleCollider:
   m_ObjectHideFlags: 0

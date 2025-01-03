@@ -1076,8 +1076,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   minDistanceToPlayer: 5
-  attackDamage: 10
-  attackCooldown: 2
+  attackDamage: 4
+  attackCooldown: 3
   player: {fileID: 0}
   maxHealth: 20
 --- !u!1 &7830922351042136937

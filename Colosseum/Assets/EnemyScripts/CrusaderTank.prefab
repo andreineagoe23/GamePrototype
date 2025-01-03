@@ -4123,10 +4123,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   minDistanceToPlayer: 5
-  attackDamage: 20
+  attackDamage: 10
   attackCooldown: 3
   player: {fileID: 0}
-  maxHealth: 5
+  maxHealth: 40
 --- !u!136 &2861333749737849793
 CapsuleCollider:
   m_ObjectHideFlags: 0

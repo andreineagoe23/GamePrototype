@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     CharacterController controller;
     Animator animator;
 
-    public AudioClip dashSound;           // Dash sound effect
-    private AudioSource audioSource;      // AudioSource for playing sounds
+    public AudioClip dashSound; // Dash sound effect
+    private AudioSource audioSource; // AudioSource for playing sounds
 
     [Header("Controller")]
     public float moveSpeed = 5;
@@ -25,11 +25,11 @@ public class PlayerController : MonoBehaviour
     bool isGrounded = true;
 
     [Header("Dash")]
-    public float dashDistance = 10f;       // Distance covered during dash
-    public float dashSpeed = 50f;         // Speed of the dash
-    public float dashCooldown = 5f;       // Cooldown time for dash
-    public Image dashCooldownImage;       // UI image for cooldown indicator
-    private bool canDash = true;          // Tracks whether dash is available
+    public float dashDistance = 10f; // Distance covered during dash
+    public float dashSpeed = 50f; // Speed of the dash
+    public float dashCooldown = 5f; // Cooldown time for dash
+    public Image dashCooldownImage; // UI image for cooldown indicator
+    private bool canDash = true; // Tracks whether dash is available
 
     [Header("Camera")]
     public Camera cam;
@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         isGrounded = controller.isGrounded;
         weaponSwitching = FindObjectOfType<WeaponSwitching>();
 
-        // Repeat Inputs
         if (input.Attack.IsPressed())
         {
             Attack();
@@ -133,10 +132,7 @@ public class PlayerController : MonoBehaviour
         input.Dash.performed += ctx => StartDash(); // Assign the dash input
     }
 
-    // ---------- //
-    // DASH MECHANIC //
-    // ---------- //
-
+    // Dash Mechanic
     void StartDash()
     {
         if (!canDash) return;
@@ -205,10 +201,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ---------- //
-    // ANIMATIONS //
-    // ---------- //
-
+    // Animations
     string currentAnimationState;
 
     public void ChangeAnimationState(string newState)
@@ -227,10 +220,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // ------------------- //
-    // ATTACKING BEHAVIOUR //
-    // ------------------- //
-
+    // Attacking Behaviour
     [Header("Attacking")]
     public float attackDistance = 3f;
     public float attackDelay = 0.4f;
@@ -238,7 +228,6 @@ public class PlayerController : MonoBehaviour
     public int attackDamage = 1;
     public LayerMask attackLayer;
 
-    public GameObject hitEffect;
     public AudioClip swordSwing;
     public AudioClip hitSound;
 
@@ -282,7 +271,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, attackDistance, attackLayer))
         {
-            HitTarget(hit.point);
+            Debug.Log("Raycast hit: " + hit.transform.name);
 
             if (hit.transform.TryGetComponent<Actor>(out Actor T))
             {
@@ -291,17 +280,13 @@ public class PlayerController : MonoBehaviour
 
             if (hit.transform.TryGetComponent<Enemy>(out Enemy enemy))
             {
+                Debug.Log("Damaging enemy: " + hit.transform.name);
                 enemy.TakeDamage(attackDamage);
             }
         }
-    }
-
-    void HitTarget(Vector3 pos)
-    {
-        audioSource.pitch = 1;
-        audioSource.PlayOneShot(hitSound);
-
-        GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
-        Destroy(GO, 20);
+        else
+        {
+            Debug.Log("Raycast did not hit any target.");
+        }
     }
 }
