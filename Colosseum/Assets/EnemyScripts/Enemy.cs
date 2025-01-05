@@ -1,8 +1,10 @@
 using UnityEngine;
+using UnityEngine.AI;  // Ensure to include this
 
 public class Enemy : MonoBehaviour
 {
     private Animator mAnimator;
+    private NavMeshAgent agent;  // Reference to the NavMesh Agent
 
     [Header("Movement")]
     public float moveSpeed = 4f;
@@ -19,19 +21,17 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     private int currentHealth;
 
-    private WaveSpawner waveSpawner;
+    private float fixedHeight;
 
     [Header("Experience Orb")]
-    public GameObject experienceOrbPrefab;
-    public int orbsToDrop = 3;
-
-    private float fixedHeight; // Variable to store the fixed height
+    public GameObject experienceOrbPrefab;  // Reference to the experience orb prefab
+    public int orbsToDrop = 3;  // Number of orbs to drop on death
 
     protected virtual void Start()
     {
         mAnimator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        waveSpawner = FindObjectOfType<WaveSpawner>();
+        agent = GetComponent<NavMeshAgent>();  // Get the NavMesh Agent component
 
         currentHealth = maxHealth;
         lastAttackTime = -attackCooldown;
@@ -44,8 +44,7 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        transform.LookAt(player);
-
+        // Get the distance to the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         if (distanceToPlayer > minDistanceToPlayer)
@@ -54,7 +53,7 @@ public class Enemy : MonoBehaviour
             {
                 mAnimator.SetTrigger("TrMove");
             }
-            MoveTowardsPlayer();
+            MoveTowardsPlayer();  // Move towards the player using NavMesh
         }
         else
         {
@@ -64,15 +63,9 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        // Move horizontally towards the player
-        Vector3 direction = transform.forward * moveSpeed * Time.deltaTime;
-
-        // Maintain fixed height
-        transform.position = new Vector3(
-            transform.position.x + direction.x,
-            fixedHeight,
-            transform.position.z + direction.z
-        );
+        // Make the enemy move towards the player using NavMesh Agent
+        agent.SetDestination(player.position);
+        agent.speed = moveSpeed;  // Set the speed of the agent
     }
 
     public virtual void Attack()
@@ -111,14 +104,17 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy died!");
 
+        // Drop experience orbs
         DropExperienceOrbs();
-        Destroy(gameObject);
+
+        Destroy(gameObject);  // Destroy the enemy object when health is 0
     }
 
     private void DropExperienceOrbs()
     {
-        if (experienceOrbPrefab == null) return;
+        if (experienceOrbPrefab == null) return;  // Ensure there's an orb prefab
 
+        // Drop multiple orbs
         for (int i = 0; i < orbsToDrop; i++)
         {
             Vector3 spawnPosition = transform.position + new Vector3(
