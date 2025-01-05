@@ -63,10 +63,17 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        // Make the enemy move towards the player using NavMesh Agent
-        agent.SetDestination(player.position);
-        agent.speed = moveSpeed;  // Set the speed of the agent
+        if (agent.isOnNavMesh) // Ensure the agent is on the NavMesh
+        {
+            agent.SetDestination(player.position);
+            agent.speed = moveSpeed; // Set the speed of the agent
+        }
+        else
+        {
+            Debug.LogWarning($"{gameObject.name} is not on a NavMesh. Please bake the NavMesh for this scene.");
+        }
     }
+
 
     public virtual void Attack()
     {
