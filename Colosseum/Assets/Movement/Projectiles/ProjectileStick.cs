@@ -17,7 +17,7 @@ public class ProjectileStick : MonoBehaviour
         }
         if (ws == null)
         {
-            ws = FindObjectOfType<WeaponSwitching>();
+            ws = Object.FindAnyObjectByType<WeaponSwitching>();
             if (ws == null)
             {
                 Debug.LogError("[ProjectileStick] WeaponSwitching reference not found in the scene!");

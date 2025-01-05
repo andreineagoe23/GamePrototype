@@ -19,21 +19,27 @@ public class Enemy : MonoBehaviour
     public int maxHealth;
     private int currentHealth;
 
-    private WaveSpawner waveSpawner; // Reference to the wave spawner
+    private WaveSpawner waveSpawner;
 
     [Header("Experience Orb")]
-    public GameObject experienceOrbPrefab; // Assign this in the Inspector
-    public int orbsToDrop = 3;             // Number of orbs to drop upon death
+    public GameObject experienceOrbPrefab;
+    public int orbsToDrop = 3;
 
-    protected virtual void Start() // Marked as virtual for derived classes
+    private float fixedHeight; // Variable to store the fixed height
+
+    protected virtual void Start()
     {
         mAnimator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         waveSpawner = FindObjectOfType<WaveSpawner>();
 
         currentHealth = maxHealth;
-        lastAttackTime = -attackCooldown; // Allows immediate attack if in range
+        lastAttackTime = -attackCooldown;
+
         mAnimator.SetTrigger("TrIdle");
+
+        // Set the fixed height to the enemy's current y-position
+        fixedHeight = transform.position.y;
     }
 
     void Update()
@@ -58,7 +64,15 @@ public class Enemy : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        // Move horizontally towards the player
+        Vector3 direction = transform.forward * moveSpeed * Time.deltaTime;
+
+        // Maintain fixed height
+        transform.position = new Vector3(
+            transform.position.x + direction.x,
+            fixedHeight,
+            transform.position.z + direction.z
+        );
     }
 
     public virtual void Attack()
@@ -97,17 +111,16 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy died!");
 
-        DropExperienceOrbs(); // Call this method to spawn orbs
-        Destroy(gameObject);  // Destroy the enemy object
+        DropExperienceOrbs();
+        Destroy(gameObject);
     }
 
     private void DropExperienceOrbs()
     {
-        if (experienceOrbPrefab == null) return; // Ensure the prefab is assigned
+        if (experienceOrbPrefab == null) return;
 
         for (int i = 0; i < orbsToDrop; i++)
         {
-            // Randomize spawn position slightly around the enemy
             Vector3 spawnPosition = transform.position + new Vector3(
                 Random.Range(-1f, 1f),
                 0.5f,
