@@ -1,66 +1,84 @@
-Welcome to Colosseum Clash !
+Welcome to Colosseum Clash!
 
-The game aims to immerse players in the thrill of surviving relentless waves of enemies, where quick reflexes, strategic combat, and skillful movement are essential to overcome increasingly difficult challenges and emerge as the ultimate survivor.
+The game immerses players in the thrill of surviving relentless waves of enemies, where quick reflexes, strategic combat, and skillful movement are essential to overcome increasingly difficult challenges and emerge as the ultimate survivor.
 
-Game Environment Features
-Grand Colosseum-style arena with towering walls and a central battlefield.
-Surrounded by spectator seating with distinct areas for player spawn points and enemy entry points.
-Basic architectural elements (pillars, arches, obstacles) for tactical gameplay.
+Game Environment Features:
 
-Player Control Features
+Grand Colosseum-style Arena: Towering walls and a central battlefield designed for tactical combat.
+Spectator Seating: Surrounds the arena, creating an immersive and intense atmosphere.
+Tactical Elements: Includes pillars, arches, and obstacles to enhance strategic gameplay.
+
+Player Control Features:
+
 Movement: WASD keys for navigation.
-Camera: Mouse controls for aiming and viewing direction.
+Camera Control: Mouse for aiming and adjusting the viewing direction.
 
 Combat Actions:
-Left-click for primary attacks (melee strikes or ranged shots).
-Spacebar to jump.
-Shift for sprinting.
-Other Features
+
+Left-click: Primary attacks (melee strikes).
+Shift: Dash.
+
+Additional Controls:
+
+Weapon Switching: Press 1, 2, or 3 to switch weapons.
+Spear Throw: Press E to throw a spear.
+Tutorial: Press T to toggle the tutorial.
+Menu: Press Esc to open the menu.
+
+Gameplay Features:
+
 Enemies in Waves: Multiple waves of enemies with increasing difficulty.
 Sword Combat Mechanics: Engage in close combat using a sword.
-Hit Sound Effect: Sound feedback when hitting enemies or objects.
-Collectible Experience: Experience collectibles dropped by defeated enemies.
-Player Health System: Health bar indicating player damage.
-Arena Navigation: Freedom of movement to avoid attacks and reposition.
+Hit Sound Effects: Provides feedback upon hitting enemies or objects.
+Collectible Experience: Experience orbs dropped by defeated enemies.
+Player Health System: A health bar to indicate player damage.
+Arena Navigation: Freedom of movement to avoid attacks and reposition strategically.
+
 External Assets
-If you did not use any external assets, state this clearly here.
-Scripts:
 
-The EnemySpawner script is responsible for instantiating enemy characters in the game. It utilizes two designated spawn points to alternate enemy spawns. The spawning process begins after an initial delay and continues indefinitely at specified intervals. The script allows for dynamic gameplay by controlling the timing and location of enemy appearances in the Colosseum arena.
-Key Features:
-Enemy Prefab: Reference to the enemy character that will be spawned.
-Spawn Points: Two defined locations where enemies can appear.
-Initial Delay: Configurable time before spawning begins.
-Spawn Interval: Adjustable time between successive enemy spawns.
+Fantasy Sword Model: High-quality 3D model for melee combat.
+Audience Crowd: Creates a lively and immersive environment.
+Sun Temple: Used as a backdrop to enhance visuals.
+Version Control: Ensures smooth collaboration and version management.
+ProBuilder: Enables custom level design.
+NavMesh AI Navigation: Implements advanced enemy pathfinding.
+Shader Graph: For creating custom shaders and enhancing visual effects.
+2D Sprite: Used in UI elements and effects.
+Unity UI: For creating in-game menus and HUD.
+Enemies: Custom enemy models and animations.
+Player Model: Fully animated and rigged for seamless gameplay.
 
-The AIController script governs the behavior of enemy characters in the game. It enables enemies to track and engage the player, creating a dynamic combat experience. The script controls the movement speed, attack damage, and attack cooldown for each enemy, allowing them to approach the player when at a distance and initiate attacks when in close range.
-Key Features:
-Player Tracking: Enemies continuously face the player and move toward them if they are outside a specified minimum distance.
-Attack Mechanism: Enemies can deal damage to the player when they are within a defined range, with an attack cooldown to regulate the frequency of attacks.
-Damage Handling: Integrates with the player's health system, allowing for health reduction upon successful attacks.
+Key Scripts
 
-Actor Script
-The Actor script manages the health system for enemy entities. It tracks the current health of an enemy and handles damage intake, triggering a death sequence when health reaches zero.
-Health Management:
-maxHealth: Sets the maximum health for the enemy.
-currentHealth: Tracks the enemy's current health.
-TakeDamage(int amount): Reduces health based on damage taken and handles death if health drops to zero.
-Death Handling: Logs a message and destroys the enemy object upon death.
+EnemySpawner.cs
+Handles enemy spawning at designated spawn points.
+Features adjustable spawn delay and interval for dynamic gameplay.
 
-The PlayerController script manages player movement, camera control, animations, and combat mechanics in the game.
+AIController.cs
+Manages enemy behavior, enabling them to track and attack the player.
+Features customizable attack damage, movement speed, and attack cooldown.
 
-Key Features:
-Movement and Jumping:
-Controls player movement using the CharacterController component, allowing smooth navigation around the arena.
-Supports jumping mechanics with customizable jump height.
-Camera Control:
-Adjusts the camera view based on mouse input for a first-person perspective, enhancing the player's immersive experience.
-Animation Handling:
-Integrates animations for various states such as idle, walking, and attacking, using an Animator component to create a responsive and fluid animation system.
-Combat Mechanics:
-Implements attack functionality, allowing the player to perform melee attacks using a sword.
-Features attack animations, sound effects, and damage calculation on enemy actors using raycasting to detect hits within a specified range.
-Input Handling:
-Utilizes the Unity Input System for responsive controls, enabling actions like movement, jumping, and attacking based on player input.
+Actor.cs
+Manages health and damage for enemies.
+Triggers death mechanics when health reaches zero.
 
-Asset: Fantasy Sword Model - 3D Model 
+PlayerController.cs
+Controls player movement, camera, and combat mechanics.
+Integrates animations, raycasting for melee attacks, and weapon switching.
+
+WaveSpawner.cs
+Coordinates enemy wave spawning with increasing difficulty.
+Tracks wave progress and triggers subsequent waves.
+
+Trigger.cs
+Activates enemy spawning or events upon player interaction with specific triggers.
+
+Enemy.cs
+Controls individual enemy AI behavior.
+Manages movement using NavMesh and player tracking.
+
+TutorialPopup.cs
+Displays an interactive tutorial panel in front of the player.
+Adjusts dynamically based on player position and facing direction.
+
+Colosseum Clash brings fast-paced action and strategic combat to life in a vibrant arena setting. Prepare for an epic survival challenge!
