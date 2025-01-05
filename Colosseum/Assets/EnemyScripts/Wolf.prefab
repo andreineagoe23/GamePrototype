@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 120208308844324691}
   - component: {fileID: 769273075259992705}
   - component: {fileID: 2004198096393549402}
-  - component: {fileID: -6748762052833839548}
+  - component: {fileID: -7145177119357436832}
   m_Layer: 3
   m_Name: Wolf
   m_TagString: Untagged
@@ -1083,7 +1083,7 @@ MonoBehaviour:
   maxHealth: 20
   experienceOrbPrefab: {fileID: 8913377332096657936, guid: d4b526302c85644b1bc445e674ccea48, type: 3}
   orbsToDrop: 2
---- !u!195 &-6748762052833839548
+--- !u!195 &-7145177119357436832
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

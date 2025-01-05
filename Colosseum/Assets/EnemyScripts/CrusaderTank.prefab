@@ -4061,7 +4061,7 @@ GameObject:
   - component: {fileID: 7076583868382297185}
   - component: {fileID: 2487228009763211411}
   - component: {fileID: 2861333749737849793}
-  - component: {fileID: -7857380927414686156}
+  - component: {fileID: -4515092500659450176}
   m_Layer: 3
   m_Name: CrusaderTank
   m_TagString: Untagged
@@ -4153,7 +4153,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!195 &-7857380927414686156
+--- !u!195 &-4515092500659450176
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
