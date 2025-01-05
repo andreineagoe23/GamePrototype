@@ -289,4 +289,15 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Raycast did not hit any target.");
         }
     }
+
+    [Header("Experience System")]
+    public int xpPerOrb = 10; // Amount of experience gained per orb
+    private int currentExperience = 0; // Tracks the player's total experience
+
+    public void AddExperience(int amount)
+    {
+        currentExperience += amount;
+        Debug.Log("Experience added: " + amount + ". Total XP: " + currentExperience);
+    }
+
 }

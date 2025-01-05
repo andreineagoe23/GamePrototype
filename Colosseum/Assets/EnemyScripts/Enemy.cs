@@ -21,6 +21,10 @@ public class Enemy : MonoBehaviour
 
     private WaveSpawner waveSpawner; // Reference to the wave spawner
 
+    [Header("Experience Orb")]
+    public GameObject experienceOrbPrefab; // Assign this in the Inspector
+    public int orbsToDrop = 3;             // Number of orbs to drop upon death
+
     protected virtual void Start() // Marked as virtual for derived classes
     {
         mAnimator = GetComponent<Animator>();
@@ -93,6 +97,24 @@ public class Enemy : MonoBehaviour
     {
         Debug.Log("Enemy died!");
 
-        Destroy(gameObject);
+        DropExperienceOrbs(); // Call this method to spawn orbs
+        Destroy(gameObject);  // Destroy the enemy object
+    }
+
+    private void DropExperienceOrbs()
+    {
+        if (experienceOrbPrefab == null) return; // Ensure the prefab is assigned
+
+        for (int i = 0; i < orbsToDrop; i++)
+        {
+            // Randomize spawn position slightly around the enemy
+            Vector3 spawnPosition = transform.position + new Vector3(
+                Random.Range(-1f, 1f),
+                0.5f,
+                Random.Range(-1f, 1f)
+            );
+
+            Instantiate(experienceOrbPrefab, spawnPosition, Quaternion.identity);
+        }
     }
 }

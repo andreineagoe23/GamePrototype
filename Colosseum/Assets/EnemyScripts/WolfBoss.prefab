@@ -411,6 +411,8 @@ MonoBehaviour:
   attackCooldown: 8
   player: {fileID: 0}
   maxHealth: 50
+  experienceOrbPrefab: {fileID: 8913377332096657936, guid: d4b526302c85644b1bc445e674ccea48, type: 3}
+  orbsToDrop: 5
 --- !u!136 &6795892188191856743
 CapsuleCollider:
   m_ObjectHideFlags: 0
